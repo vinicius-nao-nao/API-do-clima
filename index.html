@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Estação Meteo</title>
+    <title>Estação Meteorológica</title>
+    <!-- Linha abaixo evita o erro de favicon no console -->
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,19 +14,22 @@
         <h1>Previsão do Tempo</h1>
         
         <div class="search-box">
-            <input type="text" id="city-input" placeholder="Digite o nome da cidade...">
+            <input type="text" id="city-input" placeholder="Digite a cidade...">
             <button id="search-btn">Buscar</button>
+            <button id="geo-btn" title="Minha Localização">📍</button>
         </div>
 
         <div id="weather-card" class="weather-card hidden">
             <h2 id="city-name">---</h2>
-            <img id="weather-icon" src="" alt="Ícone do tempo">
-            <p id="temperature">--°C</p>
+            <div class="temp-container">
+                <img id="weather-icon" src="" alt="Clima">
+                <p id="temperature">--°C</p>
+            </div>
             <p id="description">---</p>
         </div>
 
         <div id="error-message" class="error-message hidden">
-            Cidade não encontrada. Tente novamente!
+            Cidade não encontrada ou GPS negado.
         </div>
     </div>
 

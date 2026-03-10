@@ -1,39 +1,46 @@
 :root {
-    --primary-color: #3498db;
-    --bg-color: #f4f7f6;
+    --primary-color: #007bff;
+    --bg-color: #eef2f3;
     --card-bg: #ffffff;
+    --text-color: #333;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
+    background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    color: var(--text-color);
 }
 
 .container {
     background: var(--card-bg);
     padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     text-align: center;
-    width: 350px;
+    width: 380px;
 }
 
 .search-box {
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 8px;
+    margin-bottom: 25px;
 }
 
 input {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
     flex-grow: 1;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--primary-color);
 }
 
 button {
@@ -41,29 +48,53 @@ button {
     background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    font-weight: bold;
     transition: 0.3s;
 }
 
 button:hover {
-    background-color: #2980b9;
+    background-color: #0056b3;
+}
+
+#geo-btn {
+    background-color: #28a745;
+    font-size: 1.2rem;
+}
+
+#geo-btn:hover {
+    background-color: #218838;
 }
 
 .weather-card {
-    margin-top: 20px;
-    animation: fadeIn 0.5s ease;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    animation: slideUp 0.5s ease;
 }
 
-#temperature {
-    font-size: 3rem;
-    font-weight: bold;
+.temp-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px 0;
 }
 
+#temperature {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
 #weather-icon {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+}
+
+#description {
+    text-transform: capitalize;
+    font-style: italic;
+    color: #666;
 }
 
 .hidden {
@@ -71,11 +102,14 @@ button:hover {
 }
 
 .error-message {
-    color: #e74c3c;
+    color: #dc3545;
+    background: #f8d7da;
+    padding: 10px;
+    border-radius: 8px;
     margin-top: 15px;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
