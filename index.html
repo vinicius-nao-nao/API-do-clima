@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Estação Meteo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Previsão do Tempo</h1>
+        
+        <div class="search-box">
+            <input type="text" id="city-input" placeholder="Digite o nome da cidade...">
+            <button id="search-btn">Buscar</button>
+        </div>
+
+        <div id="weather-card" class="weather-card hidden">
+            <h2 id="city-name">---</h2>
+            <img id="weather-icon" src="" alt="Ícone do tempo">
+            <p id="temperature">--°C</p>
+            <p id="description">---</p>
+        </div>
+
+        <div id="error-message" class="error-message hidden">
+            Cidade não encontrada. Tente novamente!
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
