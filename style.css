@@ -11,9 +11,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* Mudado para min-height para rolar se necessário */
     margin: 0;
-    color: var(--text-color);
+    padding: 20px;
 }
 
 .container {
@@ -22,7 +22,8 @@ body {
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     text-align: center;
-    width: 380px;
+    width: 100%;
+    max-width: 450px; /* Aumentei um pouco para o mapa caber melhor */
 }
 
 .search-box {
@@ -39,10 +40,6 @@ input {
     outline: none;
 }
 
-input:focus {
-    border-color: var(--primary-color);
-}
-
 button {
     padding: 10px 15px;
     background-color: var(--primary-color);
@@ -51,65 +48,34 @@ button {
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    transition: 0.3s;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
-#geo-btn {
-    background-color: #28a745;
-    font-size: 1.2rem;
-}
-
-#geo-btn:hover {
-    background-color: #218838;
-}
+#geo-btn { background-color: #28a745; font-size: 1.2rem; }
 
 .weather-card {
     background: #f8f9fa;
     padding: 20px;
     border-radius: 15px;
-    animation: slideUp 0.5s ease;
 }
 
 .temp-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 0;
 }
 
-#temperature {
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin: 0;
+#temperature { font-size: 3rem; font-weight: bold; margin: 0; }
+#weather-icon { width: 80px; }
+
+/* ESTILO DO MAPA */
+#map {
+    height: 250px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    z-index: 1; /* Garante que o mapa não sobreponha menus */
 }
 
-#weather-icon {
-    width: 80px;
-}
-
-#description {
-    text-transform: capitalize;
-    font-style: italic;
-    color: #666;
-}
-
-.hidden {
-    display: none;
-}
-
-.error-message {
-    color: #dc3545;
-    background: #f8d7da;
-    padding: 10px;
-    border-radius: 8px;
-    margin-top: 15px;
-}
-
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+.hidden { display: none; }
+.error-message { color: #dc3545; background: #f8d7da; padding: 10px; border-radius: 8px; margin-top: 15px; }

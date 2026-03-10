@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estação Meteorológica</title>
-    <!-- Linha abaixo evita o erro de favicon no console -->
+    <title>Estação Meteorológica + Mapa</title>
     <link rel="icon" href="data:,">
+    
+    <!-- CSS do Mapa (Leaflet) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,6 +28,9 @@
                 <p id="temperature">--°C</p>
             </div>
             <p id="description">---</p>
+
+            <!-- NOVO: Container do Mapa -->
+            <div id="map"></div>
         </div>
 
         <div id="error-message" class="error-message hidden">
@@ -33,6 +38,8 @@
         </div>
     </div>
 
+    <!-- Script do Mapa (Leaflet) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

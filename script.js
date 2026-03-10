@@ -1,5 +1,4 @@
-// CONFIGURAÇÃO - COLOQUE SUA CHAVE ABAIXO
-const apiKey = "5ee67f1558efde1856fa7d2905b07719"; 
+const apiKey = "5ee67f1558efde1856fa7d2905b07719"; // COLOQUE SUA CHAVE AQUI
 
 const cityInput = document.querySelector("#city-input");
 const searchBtn = document.querySelector("#search-btn");
@@ -11,7 +10,11 @@ const description = document.querySelector("#description");
 const weatherIcon = document.querySelector("#weather-icon");
 const errorMessage = document.querySelector("#error-message");
 
-// 1. FUNÇÃO PRINCIPAL: BUSCAR DADOS (Por Cidade ou Coordenadas)
+// Variáveis para o Mapa
+let map;
+let marker;
+
+// FUNÇÃO: BUSCAR DADOS
 async function fetchWeather(url) {
     try {
         const response = await fetch(url);
@@ -24,12 +27,16 @@ async function fetchWeather(url) {
 
         displayWeather(data);
         saveToLocalStorage(data);
+        
+        // Atualiza o mapa com as coordenadas da cidade
+        updateMap(data.coord.lat, data.coord.lon);
+
     } catch (err) {
         showError();
     }
 }
 
-// 2. EXIBIR NA TELA
+// FUNÇÃO: EXIBIR DADOS
 function displayWeather(data) {
     errorMessage.classList.add("hidden");
     weatherCard.classList.remove("hidden");
@@ -42,20 +49,32 @@ function displayWeather(data) {
     weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${iconCode}@2x.png`);
 }
 
-// 3. SALVAR NO LOCALSTORAGE
+// FUNÇÃO: ATUALIZAR MAPA (Leaflet)
+function updateMap(lat, lon) {
+    // Se o mapa ainda não existe, cria ele
+    if (!map) {
+        map = L.map('map').setView([lat, lon], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+        marker = L.marker([lat, lon]).addTo(map);
+    } else {
+        // Se já existe, apenas move para a nova cidade
+        map.setView([lat, lon], 13);
+        marker.setLatLng([lat, lon]);
+    }
+}
+
 function saveToLocalStorage(data) {
     localStorage.setItem("clima_salvo", JSON.stringify(data));
 }
 
-// 4. MOSTRAR ERRO
 function showError() {
     weatherCard.classList.add("hidden");
     errorMessage.classList.remove("hidden");
 }
 
-// --- EVENTOS ---
-
-// Busca por Nome da Cidade
+// EVENTOS
 searchBtn.addEventListener("click", () => {
     const city = cityInput.value.trim();
     if (city) {
@@ -64,7 +83,6 @@ searchBtn.addEventListener("click", () => {
     }
 });
 
-// Desafio 2: Busca por Geolocalização (GPS)
 geoBtn.addEventListener("click", () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -72,22 +90,18 @@ geoBtn.addEventListener("click", () => {
             const lon = position.coords.longitude;
             const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=pt_br&appid=${apiKey}`;
             fetchWeather(url);
-        }, () => {
-            alert("Não foi possível acessar sua localização. Verifique as permissões.");
         });
     }
 });
 
-// Busca ao apertar Enter
-cityInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") searchBtn.click();
-});
+cityInput.addEventListener("keypress", (e) => { if (e.key === "Enter") searchBtn.click(); });
 
-// Pulo do Gato: Carregar última busca ao abrir a página
+// CARREGAR AO INICIAR
 window.onload = () => {
     const savedData = localStorage.getItem("clima_salvo");
     if (savedData) {
         const data = JSON.parse(savedData);
         displayWeather(data);
+        updateMap(data.coord.lat, data.coord.lon);
     }
 };
