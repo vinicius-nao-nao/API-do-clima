@@ -1,5 +1,5 @@
 // CONFIGURAÇÕES
-const apiKey = "SUA_CHAVE_API_AQUI"; // Substitua pela sua chave do OpenWeatherMap
+const apiKey = "5ee67f1558efde1856fa7d2905b07719"; // Substitua pela sua chave do OpenWeatherMap
 const units = "metric";
 const lang = "pt_br";
 
